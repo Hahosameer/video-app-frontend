@@ -144,10 +144,11 @@ color: ${({theme})=> theme.textSoft};
 
 function Card({ type , video}) {
   const [channel, setChannel] = useState({});
+  
   useEffect(() => {
     const fetchChannel = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/users/find/${video.userId}`);
+        const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/users/find/${video.userId}`);
         setChannel(res.data);
         console.log(res.data);
       } catch (error) {

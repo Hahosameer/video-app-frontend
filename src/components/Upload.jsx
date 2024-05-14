@@ -159,7 +159,7 @@ function Upload({ setOpen }) {
       // aik min
       e.preventDefault();
       const res = await axios.post(
-        "http://localhost:5000/api/videos",
+        "https://bright-lime-butterfly.cyclic.app/api/videos",
         { ...input, tags },
         { withCredentials: true }
       );

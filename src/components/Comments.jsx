@@ -39,7 +39,7 @@ function Comments({videoId}) {
   useEffect(()=>{
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/comments/${videoId}`)
+        const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/comments/${videoId}`)
       } catch (error) {
         
       }

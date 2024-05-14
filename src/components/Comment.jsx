@@ -45,7 +45,7 @@ const [channel, setChannel] = useState();
 
 useEffect(()=> {
  const fetchComment = async ()=> {
-  const res = await axios.get(`http://localhost:5000/api/videos/find/${comment.userId}`);
+  const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/videos/find/${comment.userId}`);
   setChannel(res.data)
  }
  fetchComment()

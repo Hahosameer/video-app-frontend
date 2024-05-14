@@ -149,10 +149,10 @@ function Video() {
     const fatchData = async () => {
       try {
         const videoRes = await axios.get(
-          `http://localhost:5000/api/videos/find/${path}`
+          `https://bright-lime-butterfly.cyclic.app/api/videos/find/${path}`
         );
         const channelRes = await axios.get(
-          `http://localhost:5000/api/users/find/${videoRes.data.userId}`
+          `https://bright-lime-butterfly.cyclic.app/api/users/find/${videoRes.data.userId}`
         );
         setVideo(videoRes.data);
         setChannel(channelRes.data);
@@ -167,51 +167,27 @@ function Video() {
 
   const handleLike =async () =>{
     console.log(currentVideo._id);
-     await axios.put(`http://localhost:5000/api/users/like/${currentVideo._id}`,null,{
+     await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/like/${currentVideo._id}`,null,{
       withCredentials: true,
      });
      dispatch(like(currentUser._id))
   };
   const handleDislike =async () =>{
-    await axios.put(`http://localhost:5000/api/users/dislike/${currentVideo._id}`,null,{
+    await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/dislike/${currentVideo._id}`,null,{
      withCredentials: true,
     });
     dispatch(dislike(currentUser._id))
  };
-  // const handleLike = async () => {
-  //   if (!currentUser) return; // Check if user is logged in
-  //   try {
-  //     await axios.put(
-  //       `http://localhost:5000/api/users/like/${currentVideo._id}`,
-  //       {},
-  //       { withCredentials: true }
-  //     );
-  //     dispatch(like(currentUser._id));
-  //   } catch (error) {
-  //     console.error("Error occurred while liking:", error);
-  //   }
-  // };
-  // const handleDislike = async () => {
-  //   if (!currentUser) return; // Check if user is logged in
-  //   try {
-  //     await axios.put(
-  //       `http://localhost:5000/api/users/dislike/${currentVideo._id}`,
-  //       {},
-  //       { withCredentials: true }
-  //     );
-  //     dispatch(dislike(currentUser._id));
-  //   } catch (error) {
-  //     console.error("Error occurred while disliking:", error);
-  //   }
-  // };
+
+  
   
   const handleSub =async () =>{
     try{
       currentUser.subscribedUsers.includes(channel?._id) ?
-      await axios.put(`http://localhost:5000/api/users/unsub/${channel?._id}`,{},{
+      await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/unsub/${channel?._id}`,{},{
         withCredentials: true
       }) : 
-      await axios.put(`http://localhost:5000/api/users/sub/${channel?._id}`,{},{
+      await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/sub/${channel?._id}`,{},{
         withCredentials: true
       });
       dispatch(subscription(channel?._id))
@@ -219,12 +195,7 @@ function Video() {
       console.log("error",err);
     }
    }
-  // const handleSub = async () => {
-  //   currentUser.subscribedUsers.includes(channel?._id)
-  //   ? await axios.put(`http://localhost:5000/api/users/unsub/${channel?._id}`,{}, { withCredentials: true })
-  //   : await axios.put(`http://localhost:5000/api/users/sub/${channel?._id}`,{}, { withCredentials: true })
-  //   dispatch(subscription(channel?._id));
-  // };
+ 
 console.log(currentVideo?.tags , "currentVideo?.tagscurrentVideo?.tagscurrentVideo?.tagscurrentVideo?.tags");
 
   return (

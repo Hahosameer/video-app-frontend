@@ -16,7 +16,7 @@ function Home({type}) {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/videos/${type}`);
+        const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/videos/${type}`);
         setVideos(res.data);
         console.log(res.data);
       } catch (error) {

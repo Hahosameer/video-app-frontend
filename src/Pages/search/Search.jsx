@@ -14,7 +14,7 @@ function Search() {
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await axios.get(
-        `http://localhost:5000/api/videos/search${query}`,
+        `https://bright-lime-butterfly.cyclic.app/api/videos/search${query}`,
         null,
         {
           withCredentials: true,
