@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.bgLighter};
   border: 1px solid ${({ theme }) => theme.soft};
   gap: 10px;
-  padding: 10px 50px;
+  padding: 10px 40px;
 
   @media screen and (max-width: 347px) {
     // Adjust width for screens less than or equal to 768px
@@ -73,7 +73,7 @@ const Links = styled.div`
   color: ${({ theme }) => theme.textSoft};
 `;
 const Link = styled.span`
-  margin-left: 25px;
+  margin-left: 15px;
 `;
 function SignIn() {
   const [name, setName] = useState();

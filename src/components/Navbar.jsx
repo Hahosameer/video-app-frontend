@@ -25,13 +25,13 @@ const Topbar = styled.div`
   top: 0;
   z-index: 9;
   padding-right: 15px;
-  padding-left: 5px;
+  /* padding-left: -15px; */
 `;
 
 const Logomain = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  /* gap: 5px; */
   /* padding: 18px; */
   font-weight: 900;
   font-size: 18px;

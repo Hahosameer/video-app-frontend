@@ -24,10 +24,12 @@ import { useSelector } from "react-redux";
 
 const Container = styled.div`
   background-color: ${({theme}) =>theme.bgLighter};
-  width: 70px;
-  height: 90vh;
+  width: 60px;
+
+  height: 10vh;
+
   color: ${({theme}) =>theme.text};
-  font-size: 14px;
+  font-size: 10px;
   position: sticky;
   height: 90vh;
 top: 10vh;
@@ -43,18 +45,18 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   padding: 5px;
   cursor: pointer;
   margin-bottom: 20px;
-font-size: 10px;
+font-size: 7px;
 &:hover{
 background-color: ${({theme}) =>theme.soft};
 }
 
 `;
 const Button = styled.button`
-  padding: 5px 18px;
+  padding: 5px 15px;
   background-color: transparent;
   border: 1px solid #3ea6ff;
    color: #3ea6ff;
@@ -78,22 +80,22 @@ function Menu() {
       <Wrapper className="Wrapper">
       <Link to="/" style={{textDecoration: "none", color: "inherit"}}>
         <Item className="item">
-          <HomeIcon />
+          <HomeIcon className="itemIcon" />
           Home
         </Item>
     </Link>
         <Item className="item">
-          <OndemandVideoIcon />
+          <OndemandVideoIcon className="itemIcon" />
           Shorts
         </Item>
         <Link to="/subscriptions" style={{textDecoration: "none", color: "inherit"}}>
         <Item className="item">
-          <SubscribeIcon />
+          <SubscribeIcon className="itemIcon" />
           Subscriptions
         </Item>
         </Link>
         <Item className="item">
-          <VideoLibraryIcon />
+          <VideoLibraryIcon className="itemIcon" />
           Yoy
         </Item>
         <Item>
