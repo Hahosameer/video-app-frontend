@@ -39,7 +39,7 @@ function Comments({videoId}) {
   useEffect(()=>{
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/comments/${videoId}`)
+        const res = await axios.get(`https://videp-app-backend.vercel.app/api/comments/${videoId}`)
       } catch (error) {
         
       }

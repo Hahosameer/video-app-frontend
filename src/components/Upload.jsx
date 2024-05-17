@@ -159,7 +159,7 @@ function Upload({ setOpen }) {
       // aik min
       e.preventDefault();
       const res = await axios.post(
-        "https://bright-lime-butterfly.cyclic.app/api/videos",
+        "https://videp-app-backend.vercel.app/api/videos",
         { ...input, tags },
         { withCredentials: true }
       );

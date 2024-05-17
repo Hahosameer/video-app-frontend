@@ -14,7 +14,7 @@ function Search() {
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await axios.get(
-        `https://bright-lime-butterfly.cyclic.app/api/videos/search${query}`,
+        `https://videp-app-backend.vercel.app/videos/search${query}`,
         null,
         {
           withCredentials: true,

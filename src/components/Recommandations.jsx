@@ -12,7 +12,7 @@ function Recommandations({tags}) {
     const [videos, setVideos] = useState([]);
     useEffect(()=>{
         const fetchVideos = async ()=>{
-            const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/videos/tags?tags=${tags}`,{},{
+            const res = await axios.get(`https://videp-app-backend.vercel.app/api/videos/tags?tags=${tags}`,{},{
                 withCredentials: true,
             });
             setVideos(res.data)

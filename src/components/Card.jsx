@@ -148,7 +148,7 @@ function Card({ type , video}) {
   useEffect(() => {
     const fetchChannel = async () => {
       try {
-        const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/users/find/${video.userId}`);
+        const res = await axios.get(`https://videp-app-backend.vercel.app/api/users/find/${video.userId}`);
         setChannel(res.data);
         console.log(res.data);
       } catch (error) {

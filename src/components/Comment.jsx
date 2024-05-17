@@ -45,7 +45,7 @@ const [channel, setChannel] = useState();
 
 useEffect(()=> {
  const fetchComment = async ()=> {
-  const res = await axios.get(`https://bright-lime-butterfly.cyclic.app/api/videos/find/${comment.userId}`);
+  const res = await axios.get(`https://videp-app-backend.vercel.app/api/videos/find/${comment.userId}`);
   setChannel(res.data)
  }
  fetchComment()

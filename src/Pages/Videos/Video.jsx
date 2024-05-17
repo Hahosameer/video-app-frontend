@@ -149,10 +149,10 @@ function Video() {
     const fatchData = async () => {
       try {
         const videoRes = await axios.get(
-          `https://bright-lime-butterfly.cyclic.app/api/videos/find/${path}`
+          `https://videp-app-backend.vercel.app/api/videos/find/${path}`
         );
         const channelRes = await axios.get(
-          `https://bright-lime-butterfly.cyclic.app/api/users/find/${videoRes.data.userId}`
+          `https://videp-app-backend.vercel.app/api/users/find/${videoRes.data.userId}`
         );
         setVideo(videoRes.data);
         setChannel(channelRes.data);
@@ -167,13 +167,13 @@ function Video() {
 
   const handleLike =async () =>{
     console.log(currentVideo._id);
-     await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/like/${currentVideo._id}`,null,{
+     await axios.put(`https://videp-app-backend.vercel.app/api/users/like/${currentVideo._id}`,null,{
       withCredentials: true,
      });
      dispatch(like(currentUser._id))
   };
   const handleDislike =async () =>{
-    await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/dislike/${currentVideo._id}`,null,{
+    await axios.put(`https://videp-app-backend.vercel.app/api/users/dislike/${currentVideo._id}`,null,{
      withCredentials: true,
     });
     dispatch(dislike(currentUser._id))
@@ -184,10 +184,10 @@ function Video() {
   const handleSub =async () =>{
     try{
       currentUser.subscribedUsers.includes(channel?._id) ?
-      await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/unsub/${channel?._id}`,{},{
+      await axios.put(`https://videp-app-backend.vercel.app/api/users/unsub/${channel?._id}`,{},{
         withCredentials: true
       }) : 
-      await axios.put(`https://bright-lime-butterfly.cyclic.app/api/users/sub/${channel?._id}`,{},{
+      await axios.put(`https://videp-app-backend.vercel.app/api/users/sub/${channel?._id}`,{},{
         withCredentials: true
       });
       dispatch(subscription(channel?._id))
