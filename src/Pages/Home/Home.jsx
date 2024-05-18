@@ -20,7 +20,7 @@ function Home({type}) {
         setVideos(res.data);
         console.log(res.data);
       } catch (error) {
-        console.log("Error fetching videos:", error);
+        console.log("Error fetchings  videos:", error);
       }
     };
     fetchVideos();
