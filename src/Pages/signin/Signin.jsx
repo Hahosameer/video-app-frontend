@@ -84,7 +84,7 @@ function SignIn() {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("https://bright-lime-butterfly.cyclic.app/api/auth/signin", {
+      const res = await axios.post("https://videp-app-backend.vercel.app/api/auth/signin", {
         name,
         password,
       }, {withCredentials:true});
@@ -102,7 +102,7 @@ function SignIn() {
 
     try {
         const result = await signInWithPopup(auth, provider);
-        const response = await axios.post("http://localhost:5000/api/auth/google", {
+        const response = await axios.post("https://videp-app-backend.vercel.app/api/auth/google", {
             name: result?.user?.displayName,
             email: result?.user?.email,
             img: result?.user?.photoURL,
