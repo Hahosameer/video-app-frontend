@@ -54,9 +54,14 @@ const Search = styled.div`
   border-radius: 30px;
   padding: 0px 10px;
 
+  @media screen and (max-width: 550px) {
+    /* display: none; */
+    width: 69%;
+    gap: 5px;
+  }
   @media screen and (max-width: 350px) {
     /* display: none; */
-    width: 60%;
+    width: 70%;
     gap: 5px;
   }
 `;
@@ -100,7 +105,7 @@ const Logo = styled.div`
   cursor: pointer;
   color: ${({ theme }) => theme.text};
 
-  @media screen and (max-width: 350px) {
+  @media screen and (max-width: 550px) {
     // Hide text when width is 350px or less
 
     display: none;
@@ -156,7 +161,7 @@ function Navbar({ darkMode, setDarkMode }) {
               style={{ cursor: "pointer" }}
             />
             <Avatar src={currentUser.img} />
-            {currentUser.name}
+            {/* {currentUser.name} */}
           </User>
         ) : (
           <Link to="signin" style={{ textDecoration: "none" }}>
