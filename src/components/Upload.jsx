@@ -97,7 +97,6 @@ function Upload({ setOpen }) {
   const [tags, setTags] = useState([]);
 
   const navigate = useNavigate();
-  const {currentUser} = useSelector(state=> state.user)
 
   const handleChange = (e) => {
     setInput((prev) => {
@@ -160,16 +159,10 @@ function Upload({ setOpen }) {
     try {
       // aik min
       e.preventDefault();
-      let axiosConfig = {
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-          "Access-Control-Allow-Origin": "*",
-          'token': currentUser.token        },
-      };
       const res = await axios.post(
         `${serverUrl}/api/videos`,
         { ...input, tags },
-        axiosConfig
+        { withCredentials: true }
       );
       setOpen(false);
       res.status === 200 && navigate(`/video/${res.data?._id}`);

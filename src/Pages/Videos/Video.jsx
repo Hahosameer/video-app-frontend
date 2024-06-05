@@ -16,15 +16,15 @@ import { format } from "timeago.js";
 // import { dislike,  fetchSuccess,  like } from "../../redux/userSlice.js";
 // import { subscription } from "../../redux/userSlice.js";
 import Recommandations from "../../components/Recommandations.jsx";
-import { dislike, like,fetchSuccess  } from "../../redux/videoSlice.js";
+import { dislike, like, fetchSuccess } from "../../redux/videoSlice.js";
+import { serverUrl } from "../../components/utils/appConstans.js";
 import { subscription } from "../../redux/userSlice.js";
 
-
 const Container = styled.div`
-display: flex;
-gap: 24px;
-margin: 0 20px;
- 
+  display: flex;
+  gap: 24px;
+  margin: 0 20px;
+
   @media screen and (max-width: 965px) {
     display: flex;
     flex-direction: column;
@@ -131,11 +131,10 @@ const Subscribe = styled.button`
 `;
 
 const VideoFrame = styled.video`
-max-height: 720px ;
-width: 100%;
-object-fit: cover;
-
-`
+  max-height: 720px;
+  width: 100%;
+  object-fit: cover;
+`;
 function Video() {
   const { currentUser } = useSelector((state) => state?.user);
   const { currentVideo } = useSelector((state) => state?.video);
@@ -149,15 +148,14 @@ function Video() {
     const fatchData = async () => {
       try {
         const videoRes = await axios.get(
-          `https://videp-app-backend.vercel.app/api/videos/find/${path}`
+          `${serverUrl}/api/videos/find/${path}`
         );
         const channelRes = await axios.get(
-          `https://videp-app-backend.vercel.app/api/users/find/${videoRes.data.userId}`
+          `${serverUrl}/api/users/find/${videoRes.data.userId}`
         );
         setVideo(videoRes.data);
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
-
       } catch (error) {
         console.log(error);
       }
@@ -165,45 +163,57 @@ function Video() {
     fatchData();
   }, [path, dispatch]);
 
-  const handleLike =async () =>{
+  const handleLike = async () => {
     console.log(currentVideo._id);
-     await axios.put(`https://videp-app-backend.vercel.app/api/users/like/${currentVideo._id}`,null,{
-      withCredentials: true,
-     });
-     dispatch(like(currentUser._id))
+   
+    await axios.put(
+      `${serverUrl}/api/users/like/${currentVideo._id}`,
+      null,
+      { withCredentials: true }
+    );
+    dispatch(like(currentUser._id));
   };
-  const handleDislike =async () =>{
-    await axios.put(`https://videp-app-backend.vercel.app/api/users/dislike/${currentVideo._id}`,null,{
-     withCredentials: true,
-    });
-    dispatch(dislike(currentUser._id))
- };
+  const handleDislike = async () => {
+    await axios.put(
+      `${serverUrl}/api/users/dislike/${currentVideo._id}`,
+      null,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(dislike(currentUser._id));
+  };
 
-  
-  
-  const handleSub =async () =>{
-    try{
-      currentUser.subscribedUsers.includes(channel?._id) ?
-      await axios.put(`https://videp-app-backend.vercel.app/api/users/unsub/${channel?._id}`,{},{
-        withCredentials: true
-      }) : 
-      await axios.put(`https://videp-app-backend.vercel.app/api/users/sub/${channel?._id}`,{},{
-        withCredentials: true
-      });
-      dispatch(subscription(channel?._id))
-    }catch(err){
-      console.log("error",err);
+  const handleSub = async () => {
+    try {
+      currentUser.subscribedUsers.includes(channel?._id)
+        ? await axios.put(
+            `${serverUrl}/api/users/unsub/${channel?._id}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          )
+        : await axios.put(
+            `${serverUrl}/api/users/sub/${channel?._id}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
+      dispatch(subscription(channel?._id));
+    } catch (err) {
+      console.log("error", err);
     }
-   }
- 
-console.log(currentVideo?.tags , "currentVideo?.tagscurrentVideo?.tagscurrentVideo?.tagscurrentVideo?.tags");
+  };
+
+
 
   return (
     <Container>
       <Content>
         <VideoWrapper>
-       <VideoFrame src={currentVideo?.videoUrl} controls />
-
+          <VideoFrame src={currentVideo?.videoUrl} controls />
         </VideoWrapper>
         <Tittle>{currentVideo?.title}</Tittle>
         <Detail>
@@ -244,7 +254,9 @@ console.log(currentVideo?.tags , "currentVideo?.tagscurrentVideo?.tagscurrentVid
             <Image src={channel?.img} />
             <ChannelDetail>
               <ChannelName>{channel?.name} </ChannelName>
-              <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
+              <ChannelCounter>
+                {channel?.subscribers} subscribers
+              </ChannelCounter>
               <Descripton>{currentVideo?.desc}</Descripton>
             </ChannelDetail>
           </ChannelInfo>
@@ -255,10 +267,9 @@ console.log(currentVideo?.tags , "currentVideo?.tagscurrentVideo?.tagscurrentVid
           </Subscribe>
         </Channel>
         <Hr />
-        <Comments videoId={currentUser?._id}/>
+        <Comments videoId={currentUser?._id} />
       </Content>
-      <Recommandations tags={currentVideo?.tags}/>
-      
+      <Recommandations tags={currentVideo?.tags} />
     </Container>
   );
 }
