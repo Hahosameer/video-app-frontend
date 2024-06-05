@@ -11,6 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 import { auth, provider } from "../../firebase.js";
 import { signInWithPopup } from "firebase/auth";
+import { serverUrl } from "../../components/utils/appConstans.js";
 // import { loginFailure, loginStart, loginSuccess } from "../../redux/videoSlice.js";
 const Container = styled.div`
   display: flex;
@@ -84,10 +85,17 @@ function SignIn() {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("https://videp-app-backend.vercel.app/api/auth/signin", {
+      let axiosConfig = {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Origin": "*"
+        }  
+      };
+      const res = await axios.post(`${serverUrl}/api/auth/signin`, {
         name,
         password,
-      }, {withCredentials:true});
+      }, axiosConfig);
+      console.log("signin response",res)
       dispatch(loginSuccess(res.data));
 
       console.log(res.data);
@@ -102,12 +110,12 @@ function SignIn() {
 
     try {
         const result = await signInWithPopup(auth, provider);
-        const response = await axios.post("https://videp-app-backend.vercel.app/api/auth/google", {
+        const response = await axios.post(`${serverUrl}/api/auth/google`, {
             name: result?.user?.displayName,
             email: result?.user?.email,
             img: result?.user?.photoURL,
         }, { withCredentials: true }); // Set withCredentials to true
-
+        console.log("response" , response)
         dispatch(loginSuccess(response.data));
     } catch (error) {
         console.error("Error signing in with Google or making API call:", error);
