@@ -2,7 +2,7 @@ import Card from "../../components/Card";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
+import { serverUrl } from "../../components/utils/appConstans";
 const Container = styled.div`
 display: flex;
 justify-content: space-between;
@@ -16,7 +16,7 @@ function Home({type}) {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const res = await axios.get(`https://videp-app-backend.vercel.app/api/videos/${type}`);
+        const res = await axios.get(`${serverUrl}/api/videos/${type}`);
         setVideos(res.data);
         console.log(res.data);
       } catch (error) {

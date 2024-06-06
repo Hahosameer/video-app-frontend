@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-
+import { serverUrl } from './utils/appConstans'
 
 const Container = styled.div`
 display: flex;
@@ -45,7 +45,7 @@ const [channel, setChannel] = useState();
 
 useEffect(()=> {
  const fetchComment = async ()=> {
-  const res = await axios.get(`https://videp-app-backend.vercel.app/api/videos/find/${comment.userId}`);
+  const res = await axios.get(`${serverUrl}/api/videos/find/${comment.userId}`);
   setChannel(res.data)
  }
  fetchComment()

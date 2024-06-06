@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 // import Comment from './Comment'
 import Comment from '../components/Comment.jsx'
+import { serverUrl } from './utils/appConstans.js'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 const Container = styled.div`
@@ -39,7 +40,7 @@ function Comments({videoId}) {
   useEffect(()=>{
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`https://videp-app-backend.vercel.app/api/comments/${videoId}`)
+        const res = await axios.get(`${serverUrl}/api/comments/${videoId}`)
       } catch (error) {
         
       }

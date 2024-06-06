@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../../components/Card";
+import { serverUrl } from "../../components/utils/appConstans";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -14,7 +15,7 @@ function Search() {
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await axios.get(
-        `https://videp-app-backend.vercel.app/api/videos/search${query}`,
+        `${serverUrl}/api/videos/search${query}`,
         null,
         {
           withCredentials: true,
