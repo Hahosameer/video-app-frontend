@@ -103,6 +103,7 @@ function Upload({ setOpen }) {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+  console.log(setInput);
   const handleTags = (e) => {
     setTags(e.target.value.split(","));
   };
@@ -113,7 +114,7 @@ function Upload({ setOpen }) {
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    // bhai gg ak jaga galti ha k
+    // bhai gg ak jaga galti ha kd kaha
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -202,7 +203,7 @@ function Upload({ setOpen }) {
         />
         <Input
           type="text"
-          placeholder="Seperate the tags with commas."
+          placeholder="Seperate the tags with commas.."
           onChange={handleTags}
         />
         <Label>Image:</Label>
@@ -215,7 +216,7 @@ function Upload({ setOpen }) {
             onChange={(e) => setImg(e.target.files[0])}
           />
         )}
-        <Button onClick={handelupload}>Upload</Button>
+        <Button onClick={handelupload}>Uploada</Button>
       </Wrapper>
     </Container>
   );
