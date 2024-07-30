@@ -29,7 +29,7 @@ import {
   LightMode as LightModeIcon,
   ExitToApp as SignOutIcon,
 } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logOut } from '../redux/userSlice'; // Import logOut action
 
 const Hr = styled.hr`
@@ -38,6 +38,7 @@ const Hr = styled.hr`
 `;
 
 export default function TemporaryDrawer({ darkMode, setDarkMode }) {
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch(); // Get the dispatch function from useDispatch
 
@@ -46,6 +47,8 @@ export default function TemporaryDrawer({ darkMode, setDarkMode }) {
   };
 
   const handleSignOut = () => {
+    navigate("/")
+
     dispatch(logOut()); // Dispatch the logOut action
   };
 

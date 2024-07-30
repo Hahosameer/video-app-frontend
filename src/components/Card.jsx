@@ -150,7 +150,6 @@ function Card({ type , video}) {
       try {
         const res = await axios.get(`https://videp-app-backend.vercel.app/api/users/find/${video.userId}`);
         setChannel(res.data);
-        console.log(res.data);
       } catch (error) {
         console.log("Error fetching videos:", error);
       }

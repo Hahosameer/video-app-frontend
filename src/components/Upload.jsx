@@ -103,7 +103,7 @@ function Upload({ setOpen }) {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  console.log(setInput);
+ 
   const handleTags = (e) => {
     setTags(e.target.value.split(","));
   };
