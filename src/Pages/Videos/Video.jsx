@@ -171,6 +171,9 @@ function Video() {
         null,
         {
           withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
       dispatch(like(currentUser._id));
@@ -178,21 +181,40 @@ function Video() {
       console.log("Error liking video:", error);
     }
   };
-
-  const handleDislike = async () => {
+  const handleDislike = async (videoId) => {
     try {
-      await axios.put(
-        `${serverUrl}/api/users/dislike/${currentVideo._id}`,
-        null,
+      const response = await axios.put(
+        `https://videp-app-backend.vercel.app/api/users/dislike/${videoId}`,
+        {},
         {
           withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
-      dispatch(dislike(currentUser._id));
+      console.log(response.data);
+      // Update the state or Redux store accordingly
     } catch (error) {
-      console.log("Error disliking video:", error);
+      console.error('Error disliking video:', error);
+      // Additional error handling
     }
   };
+
+  // const handleDislike = async () => {
+  //   try {
+  //     await axios.put(
+  //       `${serverUrl}/api/users/dislike/${currentVideo._id}`,
+  //       null,
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     dispatch(dislike(currentUser._id));
+  //   } catch (error) {
+  //     console.log("Error disliking video:", error);
+  //   }
+  // };
 
   const handleSub = async () => {
     try {
