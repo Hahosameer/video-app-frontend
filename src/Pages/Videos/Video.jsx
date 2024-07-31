@@ -135,6 +135,7 @@ const VideoFrame = styled.video`
   width: 100%;
   object-fit: cover;
 `;
+
 function Video() {
   const { currentUser } = useSelector((state) => state?.user);
   const { currentVideo } = useSelector((state) => state?.video);
@@ -145,7 +146,7 @@ function Video() {
   const [video, setVideo] = useState({});
   const [channel, setChannel] = useState({});
   useEffect(() => {
-    const fatchData = async () => {
+    const fetchData = async () => {
       try {
         const videoRes = await axios.get(
           `${serverUrl}/api/videos/find/${path}`
@@ -157,38 +158,40 @@ function Video() {
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
       } catch (error) {
-        console.log(error, "error");
+        console.log("Error fetching video or channel data:", error);
       }
     };
-    fatchData();
+    fetchData();
   }, [path, dispatch]);
 
   const handleLike = async () => {
-
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*"
-      } }
-
-    console.log(currentVideo._id);
-   
-    await axios.put(
-      `${serverUrl}/api/users/like/${currentVideo._id}`,
-      null,
-      { withCredentials: true }
-    );
-    dispatch(like(currentUser._id));
+    try {
+      await axios.put(
+        `${serverUrl}/api/users/like/${currentVideo._id}`,
+        null,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(like(currentUser._id));
+    } catch (error) {
+      console.log("Error liking video:", error);
+    }
   };
+
   const handleDislike = async () => {
-    await axios.put(
-      `${serverUrl}/api/users/dislike/${currentVideo._id}`,
-      null,
-      {
-        withCredentials: true,
-      }
-    );
-    dispatch(dislike(currentUser._id));
+    try {
+      await axios.put(
+        `${serverUrl}/api/users/dislike/${currentVideo._id}`,
+        null,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(dislike(currentUser._id));
+    } catch (error) {
+      console.log("Error disliking video:", error);
+    }
   };
 
   const handleSub = async () => {
@@ -209,12 +212,10 @@ function Video() {
             }
           );
       dispatch(subscription(channel?._id));
-    } catch (err) {
-      console.log("error", err);
+    } catch (error) {
+      console.log("Error subscribing/unsubscribing:", error);
     }
   };
-
-
 
   return (
     <Container>
@@ -225,7 +226,7 @@ function Video() {
         <Tittle>{currentVideo?.title}</Tittle>
         <Detail>
           <Info>
-            {currentVideo?.views} , views . {format(currentVideo?.createdAt)}
+            {currentVideo?.views} views • {format(currentVideo?.createdAt)}
           </Info>
           <Buttons>
             <Button onClick={handleLike}>
@@ -242,7 +243,7 @@ function Video() {
               ) : (
                 <DislikeIconOutlined />
               )}{" "}
-              <span> DisLike</span>
+              <span> Dislike</span>
             </Button>
             <Button>
               <ShareIcon /> <span> Share</span>
@@ -253,14 +254,12 @@ function Video() {
             </Button>
           </Buttons>
         </Detail>
-
-        {/* bhai ak min ma ak chezz karta hook */}
         <Hr />
         <Channel>
           <ChannelInfo>
             <Image src={channel?.img} />
             <ChannelDetail>
-              <ChannelName>{channel?.name} </ChannelName>
+              <ChannelName>{channel?.name}</ChannelName>
               <ChannelCounter>
                 {channel?.subscribers} subscribers
               </ChannelCounter>
